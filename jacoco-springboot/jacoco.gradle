@@ -1,0 +1,42 @@
+apply plugin: 'jacoco'
+
+jacocoTestReport {
+//    You may also exclude a package and all of its children/subpackages this way:
+//    <exclude>some/package/**/*</exclude>
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            println 'it.getAbsolutePath()' + it.getAbsolutePath()
+                fileTree(dir: it, includes: ['**/controller/****',  '**/services/JacocoService.*'])
+
+        })
+
+        classDirectories.toList().each {
+            println it.toString()
+        }
+    }
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = true
+    }
+}
+
+//Jacoco will run all the test
+//It will compare  Filtered file aginst the the .class files (build/classes/main/
+
+
+test {
+    finalizedBy jacocoTestReport
+
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.90
+            }
+        }
+    }
+}

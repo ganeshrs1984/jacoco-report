@@ -1,0 +1,4 @@
+server:
+  servlet:
+    context-path: /jacoco-springboot
+  port: 8090
