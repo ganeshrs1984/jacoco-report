@@ -63,4 +63,15 @@ test {
 
 ```
 
-### 
+## Set thershold 
+        
+ ### set the minimum thershold - The Code coverage requirements can be specified for a project as a whole. Build will fail if the thershold is not met.
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.90
+            }
+        }
+    }
